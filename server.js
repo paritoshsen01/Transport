@@ -194,6 +194,21 @@ app.delete('/bus/delete', (req, res) => {
   res.json({ success: true, message: 'Bus deleted successfully' });
 });
 
+// Delete a driver verification
+app.delete('/admin/delete-verification', adminAuth, (req, res) => {
+  const { id } = req.query;
+  if (!id) return res.status(400).json({ error: 'id is required' });
+
+  let busDrivers = loadBusDrivers();
+  const driverIndex = busDrivers.findIndex(driver => driver.id === id);
+  if (driverIndex === -1) return res.status(404).json({ error: 'Driver not found' });
+
+  busDrivers.splice(driverIndex, 1);
+  saveBusDrivers(busDrivers);
+
+  res.json({ success: true, message: 'Driver deleted successfully' });
+});
+
 // Search buses by route
 app.get('/bus/search', (req, res) => {
   const { from, to } = req.query;

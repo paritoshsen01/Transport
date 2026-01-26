@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Customer Login - Explore The Local</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Customer Login | NaviBus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-image: url('Customerbg.png'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">Navi Bus</a>
+
+<body class="customer-login">
+  <!-- NAVBAR -->
+  <nav class="navbar home-nav">
+  <div class="nav-container">
+
+    <!-- LOGO -->
+    <div class="nav-logo">
+      <div class="logo-bus">🚌</div>
+      <div class="logo-text">
+        Navi<span>Bus</span>
+        <small>Customer Login</small>
+      </div>
     </div>
-  </nav>
 
-  <div class="content" style="max-width: 400px; margin: 100px auto;">
-    <h1>Customer Login</h1>
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+    </ul>
 
-  <div style="max-width: 400px; margin: 20px auto; text-align: center;">
-    <button id="google-login-btn" style="width: 100%; background-color: #4285F4; color: white; border: none; padding: 10px; font-size: 1rem; border-radius: 5px; cursor: pointer;">
-      Login with Google
-    </button>
   </div>
+</nav>
+
+  <div class="customer-login-desktop">
+    <div class="customer-login-card">
+
+      <div class="customer-logo">🚌</div>
+      <h1>Navi<span>Bus</span></h1>
+      <p>Login with Google to continue</p>
+
+      <!-- GOOGLE LOGIN (DO NOT CHANGE ID) -->
+<div class="google-btn-wrap">
+  <div id="google-login-btn"></div>
+</div>
+
+    <!-- Login Footer -->
+    <div class="login-footer">
+      <small>© 2025 NaviBus. Secure login powered by Google.</small>
+    </div>
+
+  </div>
+</div>
 
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="script.js"></script>
 </body>
+
 </html>

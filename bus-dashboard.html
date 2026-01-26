@@ -5,24 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bus Driver Dashboard</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">Navi Bus</a>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="admin.html" class="nav-link">Admin</a></li>
-        <li class="nav-item"><a href="bus-login.html" class="nav-link">Logout</a></li>
-      </ul>
+<body class="home-page">
+  <!-- NAVBAR -->
+  <nav class="navbar home-nav">
+  <div class="nav-container">
+
+    <!-- LOGO -->
+    <div class="nav-logo">
+      <div class="logo-bus">🚌</div>
+      <div class="logo-text">
+        Navi Bus
+        <small>Bus Driver</small>
+      </div>
     </div>
-  </nav>
+
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="bus-login.html">Logout</a></li>
+    </ul>
+
+  </div>
+</nav>
   <div class="moving-overlay"></div>
   <div class="content dashboard-content" style="background-image: url('Customerbg.png'); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 100vh; background-attachment: fixed; background-color: transparent; height: 100vh; overflow: auto;">
-    <h1>Bus Driver Dashboard</h1>
-    <div id="dashboard-content">
-      <p>Loading your dashboard...</p>
+    <div class="dashboard-header">
+      <h1><i class="fas fa-tachometer-alt"></i> Bus Driver Dashboard</h1>
+      <div class="driver-stats">
+        <div class="stat-item">
+          <i class="fas fa-bus"></i>
+          <span id="total-buses">0</span>
+          <small>Total Buses</small>
+        </div>
+        <div class="stat-item">
+          <i class="fas fa-route"></i>
+          <span id="active-routes">0</span>
+          <small>Active Routes</small>
+        </div>
+        <div class="stat-item">
+          <i class="fas fa-clock"></i>
+          <span id="last-activity">--</span>
+          <small>Last Activity</small>
+        </div>
+      </div>
     </div>
+    <div id="dashboard-content">
+      <div class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Loading your dashboard...</p>
+      </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container"></div>
   </div>
 
 
@@ -45,36 +82,79 @@
         const data = await res.json();
         if (data.status === 'approved') {
           document.getElementById('dashboard-content').innerHTML = `
-            <p>Welcome, ${data.name}!</p>
-            <p>Your verification is approved.</p>
-            <div id="bus-management">
-              <h2>Add a Bus</h2>
-              <form id="add-bus-form" enctype="multipart/form-data">
+            <div class="dashboard-welcome">
+              <div class="welcome-header">
+                <i class="fas fa-user-check"></i>
+                <h2>Welcome, ${data.name}!</h2>
+                <p>Your verification is approved. You can now manage your buses.</p>
+              </div>
+            </div>
+            <div id="bus-management" class="bus-management-section">
+              <div class="section-header">
+                <i class="fas fa-plus-circle"></i>
+                <h2>Add a New Bus</h2>
+              </div>
+              <form id="add-bus-form" enctype="multipart/form-data" class="bus-form">
                 <input type="hidden" id="driverId" name="driverId" value="${data.id}" />
-                <label for="busNumber">Bus Name:</label><br/>
-                <input type="text" id="busNumber" name="busNumber" required /><br/>
-                <label for="phone">Phone Number:</label><br/>
-                <input type="tel" id="phone" name="phone" required /><br/>
-                <label for="startPoint">From:</label><br/>
-                <select id="startPoint" name="startPoint" required>
-                  <option value="">Select From</option>
-                  <option value="Amity University">Amity University</option>
-                  <option value="Raipur">Raipur</option>
-                  <option value="Kharoa">Kharoa</option>
-                </select><br/>
-                <label for="endPoint">To:</label><br/>
-                <select id="endPoint" name="endPoint" required>
-                  <option value="">Select To</option>
-                  <option value="Amity University">Amity University</option>
-                  <option value="Raipur">Raipur</option>
-                  <option value="Kharoa">Kharoa</option>
-                </select><br/>
-                <label for="photo">Bus Photo:</label><br/>
-                <input type="file" id="photo" name="photo" accept="image/*" required /><br/><br/>
-                <button type="submit">Next</button>
+
+                <div class="form-group">
+                  <label for="busNumber">
+                    <i class="fas fa-bus"></i> Bus Name
+                  </label>
+                  <input type="text" id="busNumber" name="busNumber" placeholder="Enter bus name" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">
+                    <i class="fas fa-phone"></i> Phone Number
+                  </label>
+                  <input type="tel" id="phone" name="phone" placeholder="Enter contact number" required />
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="startPoint">
+                      <i class="fas fa-map-marker-alt"></i> From
+                    </label>
+                    <select id="startPoint" name="startPoint" required>
+                      <option value="">Select departure point</option>
+                      <option value="Amity University">Amity University</option>
+                      <option value="Raipur">Raipur</option>
+                      <option value="Kharoa">Kharoa</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="endPoint">
+                      <i class="fas fa-flag-checkered"></i> To
+                    </label>
+                    <select id="endPoint" name="endPoint" required>
+                      <option value="">Select destination</option>
+                      <option value="Amity University">Amity University</option>
+                      <option value="Raipur">Raipur</option>
+                      <option value="Kharoa">Kharoa</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="photo">
+                    <i class="fas fa-camera"></i> Bus Photo
+                  </label>
+                  <input type="file" id="photo" name="photo" accept="image/*" required />
+                </div>
+
+                <button type="submit" class="btn-primary">
+                  <span>Continue to Summary</span>
+                  <i class="fas fa-arrow-right"></i>
+                </button>
               </form>
-              <h2>Your Buses</h2>
-              <div id="bus-list"></div>
+
+              <div class="section-header">
+                <i class="fas fa-list"></i>
+                <h2>Your Buses</h2>
+              </div>
+              <div id="bus-list" class="bus-list"></div>
             </div>
           `;
           setupBusManagement(data.id);
@@ -222,21 +302,36 @@
           }
           const buses = await res.json();
           if (buses.length === 0) {
-            busListDiv.textContent = 'No buses added yet.';
+            busListDiv.innerHTML = '<div class="empty-state">No buses added yet.</div>';
             return;
           }
           busListDiv.innerHTML = '';
           buses.forEach(bus => {
             const div = document.createElement('div');
-            div.style.border = '1px solid #ccc';
-            div.style.margin = '10px';
-            div.style.padding = '10px';
+            div.className = 'bus-card';
             div.innerHTML = `
-              <p><strong>Bus Name:</strong> ${bus.busNumber}</p>
-              <p><strong>Phone:</strong> ${bus.phone}</p>
-              <p><strong>Route:</strong> ${bus.startPoint} to ${bus.endPoint}</p>
-              <p><strong>Photo:</strong> <a href="http://localhost:3001/${bus.photo}" target="_blank">View</a></p>
-              <button onclick="deleteBus('${bus.id}')">Delete Bus</button>
+              <div class="bus-card-header">
+                <i class="fas fa-bus"></i>
+                <h3>${bus.busNumber}</h3>
+              </div>
+              <div class="bus-card-info">
+                <div class="bus-info-item">
+                  <i class="fas fa-phone"></i>
+                  <span>${bus.phone}</span>
+                </div>
+                <div class="bus-info-item">
+                  <i class="fas fa-route"></i>
+                  <span>${bus.startPoint} to ${bus.endPoint}</span>
+                </div>
+              </div>
+              <div class="bus-card-actions">
+                <a href="http://localhost:3001/${bus.photo}" target="_blank" class="btn-secondary">
+                  <i class="fas fa-eye"></i> View Photo
+                </a>
+                <button onclick="deleteBus('${bus.id}')" class="btn-danger">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </div>
             `;
             busListDiv.appendChild(div);
           });
@@ -268,6 +363,196 @@
       };
 
       loadBuses(driverId);
+
+      // Update dashboard stats
+      function updateDashboardStats(buses) {
+        const totalBusesElement = document.getElementById('total-buses');
+        const activeRoutesElement = document.getElementById('active-routes');
+        const lastActivityElement = document.getElementById('last-activity');
+
+        if (totalBusesElement) {
+          totalBusesElement.textContent = buses.length;
+        }
+
+        if (activeRoutesElement) {
+          // Count unique routes
+          const routes = new Set();
+          buses.forEach(bus => {
+            routes.add(`${bus.startPoint}-${bus.endPoint}`);
+          });
+          activeRoutesElement.textContent = routes.size;
+        }
+
+        if (lastActivityElement) {
+          const now = new Date();
+          lastActivityElement.textContent = now.toLocaleTimeString();
+        }
+      }
+
+      // Enhanced loadBuses function
+      async function loadBuses(driverId) {
+        try {
+          const res = await fetch(`http://localhost:3001/bus/list?driverId=${encodeURIComponent(driverId)}`);
+          if (!res.ok) {
+            busListDiv.textContent = 'Failed to load buses.';
+            return;
+          }
+          const buses = await res.json();
+
+          // Update stats
+          updateDashboardStats(buses);
+
+          if (buses.length === 0) {
+            busListDiv.innerHTML = '<div class="empty-state">No buses added yet.</div>';
+            return;
+          }
+          busListDiv.innerHTML = '';
+          buses.forEach(bus => {
+            const div = document.createElement('div');
+            div.className = 'bus-card';
+            div.innerHTML = `
+              <div class="bus-card-header">
+                <i class="fas fa-bus"></i>
+                <h3>${bus.busNumber}</h3>
+              </div>
+              <div class="bus-card-info">
+                <div class="bus-info-item">
+                  <i class="fas fa-phone"></i>
+                  <span>${bus.phone}</span>
+                </div>
+                <div class="bus-info-item">
+                  <i class="fas fa-route"></i>
+                  <span>${bus.startPoint} to ${bus.endPoint}</span>
+                </div>
+              </div>
+              <div class="bus-card-actions">
+                <a href="http://localhost:3001/${bus.photo}" target="_blank" class="btn-secondary">
+                  <i class="fas fa-eye"></i> View Photo
+                </a>
+                <button onclick="deleteBus('${bus.id}')" class="btn-danger">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </div>
+            `;
+            busListDiv.appendChild(div);
+          });
+        } catch (error) {
+          busListDiv.textContent = 'Error loading buses.';
+        }
+      }
+
+      // Notification system
+      function showNotification(message, type = 'success', duration = 5000) {
+        const container = document.getElementById('notification-container');
+        if (!container) return;
+
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+          <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'exclamation-triangle'}"></i>
+          <div class="notification-content">${message}</div>
+          <button class="notification-close" onclick="this.parentElement.remove()">&times;</button>
+        `;
+
+        container.appendChild(notification);
+
+        // Trigger animation
+        setTimeout(() => {
+          notification.classList.add('show');
+        }, 10);
+
+        // Auto remove
+        setTimeout(() => {
+          if (notification.parentElement) {
+            notification.classList.remove('show');
+            setTimeout(() => {
+              if (notification.parentElement) {
+                notification.remove();
+              }
+            }, 300);
+          }
+        }, duration);
+      }
+
+      // Enhanced form submission with notifications
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const busNumber = formData.get('busNumber');
+        const phone = formData.get('phone');
+        const startPoint = formData.get('startPoint');
+        const endPoint = formData.get('endPoint');
+        const stops = [];
+        const times = [];
+        const photo = formData.get('photo');
+
+        // Show loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding Bus...';
+        submitBtn.disabled = true;
+
+        try {
+          const summaryFormData = new FormData();
+          summaryFormData.set('driverId', driverId);
+          summaryFormData.set('busNumber', busNumber);
+          summaryFormData.set('phone', phone);
+          summaryFormData.set('startPoint', startPoint);
+          summaryFormData.set('endPoint', endPoint);
+          summaryFormData.set('stops', JSON.stringify(stops));
+          summaryFormData.set('times', JSON.stringify(times));
+          summaryFormData.set('photo', photo);
+
+          const res = await fetch('http://localhost:3001/bus/add', {
+            method: 'POST',
+            body: summaryFormData
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            showNotification('Bus added successfully!', 'success');
+            form.reset();
+            loadBuses(driverId);
+          } else {
+            showNotification(data.error || 'Failed to add bus', 'error');
+          }
+        } catch (error) {
+          showNotification('Error adding bus. Please try again.', 'error');
+        } finally {
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }
+      });
+
+      // Enhanced delete function with confirmation and notifications
+      window.deleteBus = async function(busId) {
+        if (!confirm('Are you sure you want to delete this bus? This action cannot be undone.')) return;
+
+        try {
+          const res = await fetch('http://localhost:3001/bus/delete', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ busId })
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            showNotification('Bus deleted successfully!', 'success');
+            loadBuses(driverId);
+          } else {
+            showNotification(data.error || 'Failed to delete bus', 'error');
+          }
+        } catch (error) {
+          showNotification('Error deleting bus. Please try again.', 'error');
+        }
+      };
+
+      // Initialize stats on page load
+      updateDashboardStats([]);
     }
   </script>
 </body>

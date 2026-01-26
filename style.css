@@ -1,16 +1,11 @@
+
 /* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body, html {
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: auto;
-  position: relative;
-  color: #f5f1ea;
-}
+
 /* Background container removed as per user request */
 .background {
   display: none;
@@ -44,12 +39,13 @@ body, html {
   align-items: center;
   text-align: center;
   padding: 100px 20px 20px 20px;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(20, 20, 20, 0.9));
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #f5f1ea;
-  text-shadow: 0 0 5px rgba(0,0,0,0.8);
+  text-shadow: 0 0 10px rgba(0,0,0,0.9);
 }
 
 .dashboard-content {
@@ -76,20 +72,35 @@ h2 {
   justify-content: center;
 }
 button {
-  background-color: #ff7f00;
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
   border: none;
-  padding: 0.8em 2.5em;
-  border-radius: 30px;
+  padding: 1em 3em;
+  border-radius: 50px;
   font-weight: 700;
   color: white;
   cursor: pointer;
-  font-size: 1rem;
-  box-shadow: 0 4px 8px rgba(255,127,0,0.5);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+button:hover::before {
+  left: 100%;
 }
 button:hover {
-  background-color: #ff9c33;
-  box-shadow: 0 6px 12px rgba(255,156,51,0.7);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(255, 140, 0, 0.6);
 }
 @media (max-width: 600px) {
   h1 {
@@ -108,70 +119,129 @@ button:hover {
   }
 }
 /* Navbar styles */
-.navbar {
+/* ==================================
+   HOME PAGE – PREMIUM NAVIGATION
+   ================================== */
+
+.home-page .home-nav {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  z-index: 3000;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.75),
+    rgba(15,15,15,0.85)
+  );
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.8rem 1rem;
+
+.home-page .home-nav .nav-container {
+  max-width: 1250px;
+  margin: auto;
+  padding: 14px 26px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.nav-logo {
-  color: #ff7f00;
-  font-weight: 900;
-  font-size: 1.5rem;
-  text-decoration: none;
-  user-select: none;
+  perspective: 1000px;
 }
 
-.nav-logo::after {
-  content: "Navi Bus";
-  color: #ff7f00;
+/* LOGO */
+.home-page .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-page .logo-bus {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 0 0 4px rgba(255,140,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.home-page .logo-bus:hover {
+  transform: rotateX(15deg) rotateY(15deg) translateZ(10px);
+  box-shadow: 0 10px 30px rgba(255,140,0,0.4), 0 0 0 6px rgba(255,140,0,0.2);
+}
+
+.home-page .logo-text {
+  font-size: 1.4rem;
   font-weight: 900;
-  font-size: 1.5rem;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.home-page .logo-text span {
+  color: #ff8c00;
+}
+
+.home-page .logo-text small {
+  display: block;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* MENU */
+.home-page .nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.home-page .nav-menu a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-style: normal;
+  color: rgba(255,255,255,0.85);
+  position: relative;
+  transition: 0.3s;
+}
+
+.home-page .nav-menu a::after {
+  content: "";
   position: absolute;
-  left: 20px;
-  top: 10px;
-  pointer-events: none;
-  user-select: none;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #ff8c00, #ff4500);
+  transition: width 0.3s ease;
+}
+
+.home-page .nav-menu a:hover::after,
+.home-page .nav-menu a.active::after {
+  width: 100%;
+}
+
+.home-page .nav-menu a:hover {
+  color: #ffffff;
+  transform: rotateX(10deg) translateZ(5px);
+}
+
+.home-page .nav-cta {
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  color: #fff !important;
+}
+
+.home-page .nav-cta::after {
   display: none;
 }
 
-body.customer-login .nav-logo {
-  color: transparent;
-  position: relative;
-}
 
-body.customer-login .nav-logo::after {
-  display: inline;
-}
-.nav-menu {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-.nav-item {
-}
-.nav-link {
-  color: #f5f1ea;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-.nav-link:hover {
-  color: #ff9c33;
-  text-decoration: underline;
-}
 /* Footer styles */
 .footer {
   background-color: rgba(0,0,0,0.7);
@@ -214,13 +284,34 @@ body.customer-login .nav-logo::after {
 }
 
 /* Bus Login Page */
-body {
-  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-  color: #f5f1ea;
+html.bus-login-page body {
+  position: relative;
+  overflow: auto;
+  color: #333;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+html.bus-login-page body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('Customerbg.png') no-repeat center center / cover, rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: -1;
+}
+
+html.bus-login-page .content h1 {
+  animation: slideInLeft 1s ease-out;
+}
+
+html.bus-login-page .content p {
+  animation: slideInRight 1.5s ease-out 0.5s;
 }
 .bus-login-container {
   flex: 1;
@@ -228,6 +319,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  animation: fadeInUp 1s ease-out;
 }
 #bus-registration-form {
   max-width: 500px;
@@ -235,7 +327,6 @@ body {
   padding: 30px;
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
@@ -298,8 +389,19 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   background: #f9f9f9;
+  color: #333;
 }
-#login-section input[type="password"] {
+
+.login-subtitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 20px;
+  text-align: center;
+  font-style: italic;
+}
+#login-section input[type="password"],
+#login-section input[type="text"] {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
@@ -308,6 +410,12 @@ body {
   border-radius: 3px;
   background-color: #333;
   color: #f5f1ea;
+}
+
+#login-section input[type="password"]::placeholder,
+#login-section input[type="text"]::placeholder {
+  color: #f5f1ea;
+  opacity: 0.7;
 }
 #login-section button, #admin-section button {
   background-color: #ff8c00;
@@ -551,4 +659,843 @@ body {
 
 #bus-list div button:hover {
   background: linear-gradient(135deg, #bd2130, #a02622);
+}
+/* ===============================
+   HOME PAGE – SAFE & SCOPED STYLE
+   =============================== */
+
+.home-page .home-hero {
+  min-height: 100vh;
+  background: url("Homepage.png") center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-page .home-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55),
+    rgba(0, 0, 0, 0.85)
+  );
+}
+
+.home-page .home-content {
+  position: relative;
+  text-align: center;
+  color: #ffffff;
+  max-width: 800px;
+  padding: 20px;
+  animation: homeFadeUp 1.2s ease;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.home-page .home-content h1 {
+  font-size: 3.6rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.home-page .home-content h1 span {
+  color: #ff8c00;
+}
+
+.home-page .home-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 35px;
+}
+
+/* Buttons */
+.home-page .home-buttons {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.home-page .home-buttons button {
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  border: none;
+  padding: 14px 36px;
+  border-radius: 40px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 140, 0, 0.45);
+}
+
+.home-page .home-buttons button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(255, 140, 0, 0.65);
+}
+
+/* Click animation for BUS LOGIN button */
+@keyframes clickPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.bus-login-click {
+  animation: clickPulse 0.3s ease-in-out;
+}
+
+/* Entry Animation for Bus Login */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In Left Animation for H1 */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Zoom In Animation for P */
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Mouse Click Animation for Button */
+#bus-registration-form button:active {
+  animation: buttonClick 0.1s ease-in-out;
+}
+
+@keyframes buttonClick {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* Animation */
+@keyframes homeFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .home-page .home-content h1 {
+    font-size: 2.4rem;
+  }
+
+  .home-page .home-content p {
+    font-size: 1rem;
+  }
+
+  .home-page .home-nav .nav-container {
+    padding: 14px 16px;
+  }
+
+  .home-page .nav-menu {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+/* =====================================
+   CUSTOMER LOGIN – ENHANCED DESIGN
+   ===================================== */
+
+body.customer-login {
+  margin: 0;
+  min-height: 100vh;
+  background-image: url("Customerbg.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Customer Login Navbar - Same as Home Page */
+.customer-login .home-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3000;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.75),
+    rgba(15,15,15,0.85)
+  );
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.customer-login .home-nav .nav-container {
+  max-width: 1250px;
+  margin: auto;
+  padding: 14px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  perspective: 1000px;
+}
+
+/* LOGO */
+.customer-login .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.customer-login .logo-bus {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 0 0 4px rgba(255,140,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.customer-login .logo-bus:hover {
+  transform: rotateX(15deg) rotateY(15deg) translateZ(10px);
+  box-shadow: 0 10px 30px rgba(255,140,0,0.4), 0 0 0 6px rgba(255,140,0,0.2);
+}
+
+.customer-login .logo-text {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.customer-login .logo-text span {
+  color: #ff8c00;
+}
+
+.customer-login .logo-text small {
+  display: block;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* MENU */
+.customer-login .nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.customer-login .nav-menu a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  position: relative;
+  transition: 0.3s;
+}
+
+.customer-login .nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #ff8c00, #ff4500);
+  transition: width 0.3s ease;
+}
+
+.customer-login .nav-menu a:hover::after,
+.customer-login .nav-menu a.active::after {
+  width: 100%;
+}
+
+.customer-login .nav-menu a:hover {
+  color: #ffffff;
+  transform: rotateX(10deg) translateZ(5px);
+}
+
+.customer-login .nav-cta {
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  color: #fff !important;
+}
+
+.customer-login .nav-cta::after {
+  display: none;
+}
+
+/* Floating Shapes Animation - Removed for performance */
+
+/* Main layout */
+.customer-login-desktop {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Card */
+.customer-login-card {
+  width: 100%;
+  max-width: 450px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+  border-radius: 24px;
+  padding: 50px 40px;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  animation: cardFadeIn 1.5s ease-out;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Logo */
+.customer-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  display: grid;
+  place-items: center;
+  font-size: 2.5rem;
+  box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+  transition: all 0.3s ease;
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+.customer-logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(255, 140, 0, 0.6);
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.6);
+  }
+}
+
+/* Text */
+.customer-login-card h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.customer-login-card h1 span {
+  color: #ff8c00;
+  text-shadow: 0 0 15px rgba(255, 140, 0, 0.5);
+}
+
+.customer-login-card p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 35px;
+  line-height: 1.5;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+}
+
+.customer-login-card small {
+  display: block;
+  margin-top: 25px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Login Footer */
+.login-footer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-footer small {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+}
+
+/* =====================================
+   GOOGLE LOGIN BUTTON – ENHANCED
+   ===================================== */
+
+.google-btn-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 30px 0;
+}
+
+#google-login-btn {
+  max-width: 280px;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+#google-login-btn:hover {
+  transform: scale(1.02);
+}
+
+/* Google iframe safety */
+#google-login-btn iframe {
+  max-width: 280px !important;
+  width: 100% !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .customer-login-card {
+    max-width: 380px;
+    padding: 40px 30px;
+  }
+
+  .customer-login-card h1 {
+    font-size: 2.2rem;
+  }
+
+  .customer-logo {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+  }
+
+  .shape {
+    display: none; /* Hide floating shapes on mobile for performance */
+  }
+}
+
+/* =====================================
+   BUS DASHBOARD NAVBAR STYLES
+   ===================================== */
+
+.bus-dashboard .home-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3000;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.75),
+    rgba(15,15,15,0.85)
+  );
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.bus-dashboard .home-nav .nav-container {
+  max-width: 1250px;
+  margin: auto;
+  padding: 14px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  perspective: 1000px;
+}
+
+/* LOGO */
+.bus-dashboard .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bus-dashboard .logo-bus {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 0 0 4px rgba(255,140,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.bus-dashboard .logo-bus:hover {
+  transform: rotateX(15deg) rotateY(15deg) translateZ(10px);
+  box-shadow: 0 10px 30px rgba(255,140,0,0.4), 0 0 0 6px rgba(255,140,0,0.2);
+}
+
+.bus-dashboard .logo-text {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.bus-dashboard .logo-text span {
+  color: #ff8c00;
+}
+
+.bus-dashboard .logo-text small {
+  display: block;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* MENU */
+.bus-dashboard .nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bus-dashboard .nav-menu a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  position: relative;
+  transition: 0.3s;
+}
+
+.bus-dashboard .nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #ff8c00, #ff4500);
+  transition: width 0.3s ease;
+}
+
+.bus-dashboard .nav-menu a:hover::after,
+.bus-dashboard .nav-menu a.active::after {
+  width: 100%;
+}
+
+.bus-dashboard .nav-menu a:hover {
+  color: #ffffff;
+  transform: rotateX(10deg) translateZ(5px);
+}
+
+/* =====================================
+   ADMIN VERIFICATION TABLE STYLES
+   ===================================== */
+
+.table-container {
+  overflow-x: auto;
+  margin: 20px 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.verification-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.verification-table thead {
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.verification-table th {
+  padding: 15px 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.verification-table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  vertical-align: middle;
+  word-wrap: break-word;
+  max-width: 200px;
+  color: #333;
+}
+
+.verification-table tbody tr {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.verification-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.verification-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.verification-table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.verification-row td:first-child {
+  font-weight: 600;
+  color: #ff8c00;
+  text-decoration: none;
+}
+
+.view-link {
+  color: #ff8c00;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  display: inline-block;
+  font-size: 0.85rem;
+}
+
+.view-link:hover {
+  background: rgba(255, 140, 0, 0.1);
+  border-color: #ff8c00;
+  color: #ffb366;
+  transform: scale(1.05);
+}
+
+.actions-cell {
+  text-align: center;
+  white-space: nowrap;
+  padding: 8px 16px;
+  background: transparent;
+  position: relative;
+  z-index: 5;
+  border-radius: 6px;
+  margin: 2px;
+}
+
+.approve-btn, .reject-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 2px;
+  min-width: 70px;
+}
+
+.approve-btn {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.approve-btn:hover {
+  background: linear-gradient(135deg, #218838, #1aa085);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.reject-btn {
+  background: linear-gradient(135deg, #dc3545, #fd7e14);
+  color: white;
+}
+
+.reject-btn:hover {
+  background: linear-gradient(135deg, #c82333, #e8680f);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 2px;
+  min-width: 70px;
+  background: linear-gradient(135deg, #dc3545, #fd7e14);
+  color: white;
+}
+
+.delete-btn:hover {
+  background: linear-gradient(135deg, #c82333, #e8680f);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #ffffff;
+  font-style: italic;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  margin: 20px 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive table styles */
+@media (max-width: 1024px) {
+  .verification-table th,
+  .verification-table td {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
+
+  .verification-table th {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    margin: 15px 0;
+    border-radius: 8px;
+  }
+
+  .verification-table {
+    font-size: 0.8rem;
+  }
+
+  .verification-table th,
+  .verification-table td {
+    padding: 8px 6px;
+  }
+
+  .actions-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .approve-btn, .reject-btn {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.75rem;
+    min-width: auto;
+  }
+
+  .verification-row td:first-child {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .verification-table th {
+    display: none;
+  }
+
+  .verification-table, .verification-table tbody, .verification-table tr, .verification-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .verification-table tr {
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .verification-table td {
+    text-align: right;
+    padding: 10px 15px;
+    position: relative;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .verification-table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    color: #ff8c00;
+  }
+
+  .verification-table td:last-child {
+    border-bottom: none;
+  }
+
+  .actions-cell {
+    text-align: center;
+    padding-top: 15px;
+  }
+
+  .approve-btn, .reject-btn {
+    display: inline-block;
+    width: auto;
+    margin: 0 5px;
+  }
 }

@@ -6,40 +6,155 @@
   <title>Admin - Bus Driver Verification</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">Navi Bus</a>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact Us</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="moving-overlay"></div>
-    <div class="content" style="padding-bottom: 60px;">
-    <h1>Admin Panel</h1>
-    <h2>Bus Driver Verification</h2>
+<body class="home-page">
+  <!-- NAVBAR -->
+  <nav class="navbar home-nav">
+  <div class="nav-container">
 
-    <div id="login-section" class="admin-container">
-      <h2>Admin Login</h2>
-      <input type="password" id="admin-password" placeholder="Enter admin password" />
-      <button id="login-btn">Login</button>
-      <p id="login-message"></p>
+    <!-- LOGO -->
+    <div class="nav-logo">
+      <div class="logo-bus">🚌</div>
+      <div class="logo-text">
+        Navi<span>Bus</span>
+        <small>Admin Panel</small>
+      </div>
+    </div>
+
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="admin.html" class="active">Admin</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+
+  </div>
+</nav>
+  <div class="moving-overlay"></div>
+  <div class="content" style="padding-bottom: 60px;">
+    <div class="admin-header">
+      <h1>🛡️ Admin Panel</h1>
+      <p>Manage Bus Driver Verifications</p>
+    </div>
+
+    <div id="login-section" class="admin-login-card">
+      <div class="login-header">
+        <div class="login-icon-container">
+          <div class="login-icon">🔐</div>
+          <div class="icon-glow"></div>
+        </div>
+        <h2>Admin Access Portal</h2>
+        <p class="login-subtitle">Secure authentication required</p>
+      </div>
+
+      <div class="login-form">
+        <div class="input-group">
+          <label for="admin-password">Administrator Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="admin-password" placeholder="Enter your admin password" />
+            <div class="input-icon">👁️</div>
+          </div>
+        </div>
+
+        <div class="login-actions">
+          <button id="login-btn" class="login-button">
+            <span class="button-text">Authenticate</span>
+            <div class="button-loader" style="display: none;"></div>
+          </button>
+        </div>
+
+        <div class="login-feedback">
+          <p id="login-message" class="login-message"></p>
+          <div class="security-notice">
+            <small>🔒 This area is restricted to authorized personnel only</small>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="admin-section" style="display:none;">
-      <button id="logout-btn" style="float: right; margin: 10px;">Logout</button>
-      <div class="admin-container">
-        <h2>Pending Verifications</h2>
-        <div id="pending-list"></div>
+      <div class="admin-controls">
+        <button id="logout-btn" class="logout-button">Logout</button>
+        <div class="admin-stats">
+          <div class="stat-card">
+            <h3 id="pending-count">0</h3>
+            <p>Pending</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="accepted-count">0</h3>
+            <p>Accepted</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="rejected-count">0</h3>
+            <p>Rejected</p>
+          </div>
+        </div>
       </div>
 
-      <div class="admin-container">
-        <h2>Rejected Verifications</h2>
-        <div id="rejected-list"></div>
+      <div class="verifications-grid">
+        <div class="verification-section">
+          <h2>⏳ Pending Verifications</h2>
+          <div class="table-container">
+            <table id="pending-table" class="verification-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Submitted At</th>
+                  <th>Photo</th>
+                  <th>License</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="pending-list">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="verification-section">
+          <h2>✅ Accepted Verifications</h2>
+          <div class="table-container">
+            <table id="accepted-table" class="verification-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Submitted At</th>
+                  <th>Photo</th>
+                  <th>License</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="accepted-list">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="verification-section">
+          <h2>❌ Rejected Verifications</h2>
+          <div class="table-container">
+            <table id="rejected-table" class="verification-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Submitted At</th>
+                  <th>Photo</th>
+                  <th>License</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="rejected-list">
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-  </div>
+    </div>
   </div>
   <footer class="footer" style="position: fixed; bottom: 0; width: 100%; background-color: rgba(0,0,0,0.7); color: white; text-align: center; padding: 10px 0;">
     <p>© 2024 Explore The Local. All rights reserved.</p>
@@ -47,7 +162,7 @@
   </footer>
 
   <script>
-    let token = null;
+    let token = localStorage.getItem('adminToken');
 
     const loginSection = document.getElementById('login-section');
     const adminSection = document.getElementById('admin-section');
@@ -55,7 +170,17 @@
     const logoutBtn = document.getElementById('logout-btn');
     const loginMessage = document.getElementById('login-message');
     const pendingList = document.getElementById('pending-list');
+    const acceptedList = document.getElementById('accepted-list');
     const rejectedList = document.getElementById('rejected-list');
+
+    // Check if already logged in on page load
+    if (token) {
+      loginSection.style.display = 'none';
+      adminSection.style.display = 'block';
+      loadPending();
+      loadAccepted();
+      loadRejected();
+    }
 
     loginBtn.addEventListener('click', () => {
       const password = document.getElementById('admin-password').value;
@@ -68,20 +193,43 @@
         loginMessage.textContent = 'Incorrect password';
         return;
       }
-      // For simplicity, store token as password
+      // Store token in localStorage
       token = password;
+      localStorage.setItem('adminToken', token);
       loginMessage.textContent = '';
       loginSection.style.display = 'none';
       adminSection.style.display = 'block';
       loadPending();
+      loadAccepted();
       loadRejected();
     });
 
     logoutBtn.addEventListener('click', () => {
       token = null;
+      localStorage.removeItem('adminToken');
       loginSection.style.display = 'block';
       adminSection.style.display = 'none';
       document.getElementById('admin-password').value = '';
+    });
+
+    // Eye button to toggle password visibility
+    const eyeIcon = document.querySelector('.input-icon');
+    const passwordInput = document.getElementById('admin-password');
+    eyeIcon.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.textContent = '🙈'; // Change to closed eye when visible
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.textContent = '👁️'; // Change back to open eye when hidden
+      }
+    });
+
+    // Trigger authenticate button on Enter key press
+    passwordInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        loginBtn.click();
+      }
     });
 
     async function loadPending() {
@@ -90,41 +238,81 @@
           headers: { Authorization: 'Bearer ' + token }
         });
         if (res.status === 401) {
-          alert('Unauthorized. Please login again.');
-          // Do not logout automatically, just show login section
-          token = null;
-          loginSection.style.display = 'block';
-          adminSection.style.display = 'none';
-          // Keep the password field as is
+          alert('Session expired. Please refresh the page and login again.');
+          // Do not automatically logout, just show error
           return;
         }
         const data = await res.json();
         pendingList.innerHTML = '';
         if (data.length === 0) {
-          pendingList.textContent = 'No pending verifications.';
+          pendingList.innerHTML = '<div class="empty-state">No pending verifications.</div>';
           return;
         }
         data.forEach(driver => {
-          const div = document.createElement('div');
-          div.style.border = '1px solid #ccc';
-          div.style.margin = '10px';
-          div.style.padding = '10px';
+          const tr = document.createElement('tr');
+          tr.className = 'verification-row';
 
-          div.innerHTML = `
-            <p><strong>Name:</strong> ${driver.name}</p>
-            <p><strong>Email:</strong> ${driver.email}</p>
-            <p><strong>Phone:</strong> ${driver.phone}</p>
-            <p><strong>Submitted At:</strong> ${new Date(driver.submittedAt).toLocaleString()}</p>
-            <p><strong>Photo:</strong> <a href="http://localhost:3001/${driver.photo}" target="_blank">View</a></p>
-            <p><strong>License:</strong> <a href="http://localhost:3001/${driver.license}" target="_blank">View</a></p>
-            <button onclick="approve('${driver.id}')">Approve</button>
-            <button onclick="reject('${driver.id}')">Reject</button>
+          tr.innerHTML = `
+            <td>${driver.name}</td>
+            <td>${driver.email}</td>
+            <td>${driver.phone}</td>
+            <td>${new Date(driver.submittedAt).toLocaleString()}</td>
+            <td><a href="http://localhost:3001/${driver.photo}" target="_blank" class="view-link">View</a></td>
+            <td><a href="http://localhost:3001/${driver.license}" target="_blank" class="view-link">View</a></td>
+            <td class="actions-cell">
+              <button class="approve-btn" onclick="approve('${driver.id}')">Approve</button>
+              <button class="reject-btn" onclick="reject('${driver.id}')">Reject</button>
+            </td>
           `;
-          pendingList.appendChild(div);
+          pendingList.appendChild(tr);
         });
+        updateStats();
       } catch (error) {
         console.error(error);
-        pendingList.textContent = 'Failed to load pending verifications.';
+        pendingList.innerHTML = '<div class="empty-state">Failed to load pending verifications.</div>';
+      }
+    }
+
+    async function loadAccepted() {
+      try {
+        const res = await fetch('http://localhost:3001/admin/verifications', {
+          headers: { Authorization: 'Bearer ' + token }
+        });
+        if (res.status === 401) {
+          alert('Unauthorized. Please login again.');
+          token = null;
+          loginSection.style.display = 'block';
+          adminSection.style.display = 'none';
+          return;
+        }
+        const data = await res.json();
+        const accepted = data.filter(d => d.status === 'approved');
+        acceptedList.innerHTML = '';
+        if (accepted.length === 0) {
+          acceptedList.innerHTML = '<div class="empty-state">No accepted verifications.</div>';
+          return;
+        }
+        accepted.forEach(driver => {
+          const tr = document.createElement('tr');
+          tr.className = 'verification-row';
+
+          tr.innerHTML = `
+            <td>${driver.name}</td>
+            <td>${driver.email}</td>
+            <td>${driver.phone}</td>
+            <td>${new Date(driver.submittedAt).toLocaleString()}</td>
+            <td><a href="http://localhost:3001/${driver.photo}" target="_blank" class="view-link">View</a></td>
+            <td><a href="http://localhost:3001/${driver.license}" target="_blank" class="view-link">View</a></td>
+            <td class="actions-cell">
+              <button class="delete-btn" onclick="deleteDriver('${driver.id}')">🗑️ Delete</button>
+            </td>
+          `;
+          acceptedList.appendChild(tr);
+        });
+        updateStats();
+      } catch (error) {
+        console.error(error);
+        acceptedList.innerHTML = '<div class="empty-state">Failed to load accepted verifications.</div>';
       }
     }
 
@@ -135,40 +323,50 @@
         });
         if (res.status === 401) {
           alert('Unauthorized. Please login again.');
-          // Do not logout automatically, just show login section
           token = null;
           loginSection.style.display = 'block';
           adminSection.style.display = 'none';
-          // Keep the password field as is
           return;
         }
         const data = await res.json();
         const rejected = data.filter(d => d.status === 'rejected');
         rejectedList.innerHTML = '';
         if (rejected.length === 0) {
-          rejectedList.textContent = 'No rejected verifications.';
+          rejectedList.innerHTML = '<div class="empty-state">No rejected verifications.</div>';
           return;
         }
         rejected.forEach(driver => {
-          const div = document.createElement('div');
-          div.style.border = '1px solid #ccc';
-          div.style.margin = '10px';
-          div.style.padding = '10px';
+          const tr = document.createElement('tr');
+          tr.className = 'verification-row';
 
-          div.innerHTML = `
-            <p><strong>Name:</strong> ${driver.name}</p>
-            <p><strong>Email:</strong> ${driver.email}</p>
-            <p><strong>Phone:</strong> ${driver.phone}</p>
-            <p><strong>Submitted At:</strong> ${new Date(driver.submittedAt).toLocaleString()}</p>
-            <p><strong>Photo:</strong> <a href="http://localhost:3001/${driver.photo}" target="_blank">View</a></p>
-            <p><strong>License:</strong> <a href="http://localhost:3001/${driver.license}" target="_blank">View</a></p>
+          tr.innerHTML = `
+            <td>${driver.name}</td>
+            <td>${driver.email}</td>
+            <td>${driver.phone}</td>
+            <td>${new Date(driver.submittedAt).toLocaleString()}</td>
+            <td><a href="http://localhost:3001/${driver.photo}" target="_blank" class="view-link">View</a></td>
+            <td><a href="http://localhost:3001/${driver.license}" target="_blank" class="view-link">View</a></td>
+            <td class="actions-cell">
+              <button class="delete-btn" onclick="deleteDriver('${driver.id}')">🗑️ Delete</button>
+            </td>
           `;
-          rejectedList.appendChild(div);
+          rejectedList.appendChild(tr);
         });
+        updateStats();
       } catch (error) {
         console.error(error);
-        rejectedList.textContent = 'Failed to load rejected verifications.';
+        rejectedList.innerHTML = '<div class="empty-state">Failed to load rejected verifications.</div>';
       }
+    }
+
+    function updateStats() {
+      const pendingItems = document.querySelectorAll('#pending-list .verification-row');
+      const acceptedItems = document.querySelectorAll('#accepted-list .verification-row');
+      const rejectedItems = document.querySelectorAll('#rejected-list .verification-row');
+
+      document.getElementById('pending-count').textContent = pendingItems.length;
+      document.getElementById('accepted-count').textContent = acceptedItems.length;
+      document.getElementById('rejected-count').textContent = rejectedItems.length;
     }
 
     async function approve(id) {
@@ -186,6 +384,7 @@
           alert('Driver approved');
           // Do not logout automatically after approve
           loadPending();
+          loadAccepted();
           loadRejected();
         } else {
           alert(data.error || 'Failed to approve');
@@ -209,12 +408,36 @@
         if (res.ok) {
           alert('Driver rejected');
           loadPending();
+          loadAccepted();
           loadRejected();
         } else {
           alert(data.error || 'Failed to reject');
         }
       } catch (error) {
         alert('Error rejecting driver');
+      }
+    }
+
+    async function deleteDriver(id) {
+      if (!confirm('Are you sure you want to delete this driver?')) return;
+      try {
+        const res = await fetch(`http://localhost:3001/admin/delete-verification?id=${id}`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        });
+        const data = await res.json();
+        if (res.ok) {
+          alert('Driver deleted');
+          loadPending();
+          loadAccepted();
+          loadRejected();
+        } else {
+          alert(data.error || 'Failed to delete');
+        }
+      } catch (error) {
+        alert('Error deleting driver');
       }
     }
   </script>

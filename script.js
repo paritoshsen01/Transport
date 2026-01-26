@@ -98,6 +98,14 @@ function handleCredentialResponse(response) {
   window.location.href = 'customer-dashboard.html?' + params.toString();
 }
 
+function handleBusLoginClick(event) {
+  const button = event.target;
+  button.classList.add('bus-login-click');
+  setTimeout(() => {
+    window.location.href = 'bus-login.html';
+  }, 300);
+}
+
 window.onload = function() {
   google.accounts.id.initialize({
     client_id: googleClientId,

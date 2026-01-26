@@ -2,34 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Explore The Local - SIH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Navi Bus | Explore The Local</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">Navi Bus</a>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="admin.html" class="nav-link">Admin</a></li>
-        <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
-      </ul>
+
+<body class="home-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar home-nav">
+  <div class="nav-container">
+
+    <!-- LOGO -->
+    <div class="nav-logo">
+      <div class="logo-bus">🚌</div>
+      <div class="logo-text">
+        Navi<span>Bus</span>
+        <small>Explore Local</small>
+      </div>
     </div>
-  </nav>
-  <div class="moving-overlay"></div>
-  <div class="content" style="background-image: url('Homepage.png'); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 100vh;">
-    <h1>Explore The<br />Local</h1>
-    <h2>Let us plan it for you</h2>
-    <div class="buttons">
-      <button onclick="location.href='bus-login.html'">BUS LOGIN</button>
-      <button onclick="location.href='customer-login.html'">CUSTOMER LOGIN</button>
-    </div>
+
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="admin.html">Admin</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+
   </div>
+</nav>
+
+  <!-- HOME HERO -->
+  <section class="home-hero">
+    <div class="home-overlay"></div>
+
+    <div class="home-content">
+      <h1>Explore The <span>Local</span></h1>
+      <p>Smart, safe and reliable local transport for everyone</p>
+
+      <div class="home-buttons">
+        <button onclick="handleBusLoginClick(event)">BUS LOGIN</button>
+        <button onclick="location.href='customer-login.html'">CUSTOMER LOGIN</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="footer" id="contact">
-    <p>© 2025 Explore The Local. All rights reserved.</p>
-    <p>Made by CODEX team</p>
+    <p>© 2025 Navi Bus. All rights reserved.</p>
+    <p>Made by CODEX Team</p>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
